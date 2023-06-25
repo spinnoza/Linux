@@ -123,6 +123,32 @@ $()
 
 ![image-20230625200829103](./assets/image-20230625200829103.png)
 
+- 文件和目录被组织成一个单根倒置树结构
+
+- 文件系统从根目录下开始，用“/”表示
+
+- 根文件系统(rootfs)：root filesystem
+
+- 标准Linux文件系统（如：ext4），文件名称大小写敏感，例如：MAIL, Mail, mail, mAiL
+
+- 以 . 开头的文件为隐藏文件
+
+- 路径分隔的 /
+
+- 文件名最长255个字节
+
+- 包括路径在内文件名称最长4095个字节
+
+- 蓝色-->目录 绿色-->可执行文件 红色-->压缩文件 浅蓝色-->链接文件 灰色-->其他文件
+
+- 除了斜杠和NUL,所有字符都有效.但使用特殊字符的目录名和文件不推荐使用，有些字符需要用引
+
+  号来引用
+
+- 每个文件都有两类相关数据：元数据：metadata，即属性， 数据：data，即文件内容
+
+
+
 
 
 /boot：引导文件存放目录，内核文件(vmlinuz)、引导加载器(bootloader, grub)都存放于此目录
@@ -200,6 +226,31 @@ $()
 /sys：用于输出当前系统上硬件设备相关信息虚拟文件系统
 
 /selinux: security enhanced Linux，selinux相关的安全策略等信息的存储位置
+
+
+
+### 2.文件类型
+
+- -普通文件
+- d 目录文件directory
+- l 符号链接文件link
+- b 块设备block 
+- c 字符设备character
+- p 管道文件pipe
+- s 套接字文件socket
+
+
+
+### 3.文件操作
+
+- 基名和目录名
+
+  ~~~bash
+  [21:26:23 root@rocky ~]#dirname /etc/sysconfig/network-scripts/ifcfg-ens160
+  /etc/sysconfig/network-scripts
+  [21:26:30 root@rocky ~]#basename /etc/sysconfig/network-scripts/ifcfg-ens160
+  ifcfg-ens160
+  ~~~
 
 
 
