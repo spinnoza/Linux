@@ -85,6 +85,8 @@ lsblk 查看硬盘大小
 
 cat /proc/partitions
 
+df -h
+
 
 
 uname -r 查看内核版本
@@ -299,13 +301,107 @@ $()
 
 - 文件删除和目录管理
 
+  安全的删除正在使用的文件
+  
+   
+
+### 4.文件属性
+
+文件inode number
+
+文件编号满了就算有空间也无法创建文件了
+
+
+
+### 5.标准输入输出错误和重定向
+
+- 概念阐述
+
+  1.打开一个文件
+
+  ~~~shell
+  [21:31:26 root@rocky ~]#tail -f /var/log/messages
+  Jul  1 21:31:26 rocky systemd[1]: Started User Manager for UID 0.
+  Jul  1 21:31:26 rocky systemd[1]: Started Session 4 of user root.
+  Jul  1 21:31:26 rocky systemd[2396]: Started D-Bus User Message Bus.
+  Jul  1 21:31:26 rocky dbus-daemon[2450]: [session uid=0 pid=2450] Activating via systemd: service name='org.gtk.vfs.Daemon' unit='gvfs-daemon.service' requested by ':1.1' (uid=0 pid=2448 comm="flatpak --installations " label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+  Jul  1 21:31:26 rocky systemd[2396]: Starting Virtual filesystem service...
+  Jul  1 21:31:26 rocky dbus-daemon[2450]: [session uid=0 pid=2450] Successfully activated service 'org.gtk.vfs.Daemon'
+  Jul  1 21:31:26 rocky systemd[2396]: Started Virtual filesystem service.
+  Jul  1 21:31:31 rocky systemd[1]: fprintd.service: Succeeded.
+  Jul  1 21:31:31 rocky systemd[1]: systemd-localed.service: Succeeded.
+  Jul  1 21:31:31 rocky systemd[1]: systemd-hostnamed.service: Succeeded.
+  Jul  1 21:31:42 rocky systemd-logind[1079]: New session 6 of user root.
+  
+  ~~~
+
+​	   2.查看该命令的进程编号
+
+ ~~~ shell
+ [21:31:43 root@rocky ~]#pidof tail
+ 2480
+ ~~~
+
+​     3.查看进程编号关联的文件描述符
+
+~~~ shell
+[21:37:58 root@rocky ~]#ls /proc/2480/fd -l
+total 0
+lrwx------. 1 root root 64 Jul  1 21:37 0 -> /dev/pts/1
+lrwx------. 1 root root 64 Jul  1 21:37 1 -> /dev/pts/1
+lrwx------. 1 root root 64 Jul  1 21:37 2 -> /dev/pts/1
+lr-x------. 1 root root 64 Jul  1 21:37 3 -> /var/log/messages
+lr-x------. 1 root root 64 Jul  1 21:37 4 -> anon_inode:inotify
+~~~
+
+
+
+- /dev/null设备是一个特殊的字符设备,类似于一个黑洞,可以用重定向的功能删除一个文件
+
+- 1> 标准输出
+
+- 2> 标准错误
+
+- 追加 1>> 2>>
+
+- 标准输入 < 
+
+- 多行重定向
+
+  ~~~ shell
+  [22:24:12 root@rocky test]#cat > a.txt <<EOF
+  > line1
+  > line2
+  > line3
+  > EOF
+  [22:24:41 root@rocky test]#cat a.txt 
+  line1
+  line2
+  line3
+  ~~~
+
+
+
+### 6.硬链接和软链接
+
+- 硬链接两个文件的节点编号一样,链接数加1
+- 跨分区不能创建硬链接
+- 修改软链接的任何一个文件都会修改源文件
+- 软链接的应用: 版本升级...
+- 注意删除软链接的/
+- 软链接可以跨分区
+
+
+
+### 7.管道
+
+- tee 命令和tr命令
+
+- 管道符号 |    : 把一个命令的标准输出 给到一个命令的标准输入
+
   
 
-
-
-
-
-
+  
 
 
 
