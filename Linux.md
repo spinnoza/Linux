@@ -467,9 +467,39 @@ lr-x------. 1 root root 64 Jul  1 21:37 4 -> anon_inode:inotify
 
 ### 2.用户管理命令
 
-- useradd
-- usermod
+- useradd 添加用户
+
+  家目录模板
+
+  
+
+- usermod 修改用户
+
+  锁定账号
+
+  解锁账号
+
+  
+
 - userdel
+
+  删除用户需要同时删除邮箱和家目录
+
+
+
+- 修改密码:
+  1.  passwd 用户名
+  2. passwd --stdin mage
+
+- 切换用户 su
+
+​	完全切换和不完全切换
+
+​    su -  用户名 -c  : 不用切换用户直接执行命令
+
+   无法切换nologin 用户
+
+
 
 ### 3.组账号维护命令
 
