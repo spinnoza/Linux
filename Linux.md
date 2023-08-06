@@ -886,6 +886,10 @@ ctrl+w,o：取消全部窗口
   [root@centos8 ~]#cut -d: -f1,3-4,7 /etc/passwd
   ~~~
 
+
+
+
+
 - **paste**
 
   paste 合并多个文件同行号的列到一行
@@ -1001,7 +1005,39 @@ ctrl+w,o：取消全部窗口
 
 
 
-## 7.网络
+## 7.磁盘存储和文件系统
+
+- 查询硬盘信息
+
+lsblk
+
+- 分区
+
+MBR ,GPT
+
+
+
+MBR 最多4个分区 , 主分区+ 逻辑分区 <=4
+
+
+
+- BIOS 和 UEFI
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 8.网络
 
 重启网络(rocky 8)
 
@@ -1015,6 +1051,16 @@ nmcli connection up ...
 ~~~
 cat /etc/resolv.conf
 ~~~
+
+
+
+- ss 命令
+
+*用于显示套接字状态*
+
+
+
+- ip命令
 
 
 
